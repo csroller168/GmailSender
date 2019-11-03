@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GmailSender", "GmailSender.csproj", "{BD158C95-B1C8-4192-8942-CC410B8F0F81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD158C95-B1C8-4192-8942-CC410B8F0F81}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{BD158C95-B1C8-4192-8942-CC410B8F0F81}.Debug|anycpu.Build.0 = Debug|anycpu
+		{BD158C95-B1C8-4192-8942-CC410B8F0F81}.Release|anycpu.ActiveCfg = Release|anycpu
+		{BD158C95-B1C8-4192-8942-CC410B8F0F81}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+EndGlobal
