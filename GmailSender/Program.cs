@@ -20,12 +20,8 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using MimeKit;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GmailQuickstart
 {
@@ -42,6 +38,9 @@ namespace GmailQuickstart
 
         static void Main(string[] args)
         {
+            var contentPath = args[0];
+            var recipients = args[1].Split(',');
+
             UserCredential credential;
 
             using (var stream =
@@ -66,20 +65,16 @@ namespace GmailQuickstart
                 ApplicationName = ApplicationName,
             });
 
-            var msg = GetMessage();
+            var msg = GetMessage(contentPath, recipients);
 
-            for(int i = 0; i < 99; i++)
-            {
-                service.Users.Messages.Send(msg, "me").Execute();
-                System.Threading.Thread.Sleep(15000);
-            }
+            service.Users.Messages.Send(msg, "me").Execute();
         }
 
-        private static Message GetMessage()
+        private static Message GetMessage(string contentPath, string[] recipients)
         {
             using (var ms = new MemoryStream())
             {
-                var mime = GetMimeMessage();
+                var mime = GetMimeMessage(contentPath, recipients);
                 mime.WriteTo(ms);
                 var bytes = ms.ToArray();
                 var encodedStr = Convert
@@ -93,19 +88,22 @@ namespace GmailQuickstart
             }
         }
 
-        private static MimeMessage GetMimeMessage()
+        private static MimeMessage GetMimeMessage(string contentPath, string[] recipients)
         {
             var msg = new MimeMessage();
-            msg.From.Add(new MailboxAddress("", "from@gmail.com"));
-            msg.To.Add(new MailboxAddress("", "to@gmmail.com"));
-            msg.Subject = "subject";
-            msg.Body = new TextPart("plain") { Text = GetContent() };
+            msg.From.Add(new MailboxAddress("", "chrisshort168@gmail.com"));
+            foreach(var to in recipients)
+            {
+                msg.To.Add(new MailboxAddress("", to));
+            }
+            msg.Subject = "hello me";
+            msg.Body = new TextPart("plain") { Text = GetContent(contentPath) };
             return msg;
         }
 
-        private static string GetContent()
+        private static string GetContent(string contentPath)
         {
-            return System.IO.File.ReadAllText("content.txt");
+            return File.ReadAllText(contentPath);
         }
     }
 }
