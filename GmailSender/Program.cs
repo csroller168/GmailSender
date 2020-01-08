@@ -42,9 +42,11 @@ namespace GmailQuickstart
             var recipients = args[1].Split(',');
 
             UserCredential credential;
-
+            var credentialsPath = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                "credentials.json");
             using (var stream =
-                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
