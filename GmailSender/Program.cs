@@ -38,7 +38,8 @@ namespace GmailQuickstart
 
         static void Main(string[] args)
         {
-            var contentPath = args[0];
+            //var contentPath = args[0];
+            var symbols = args[0];
             var recipients = args[1].Split(',');
 
             UserCredential credential;
@@ -67,16 +68,16 @@ namespace GmailQuickstart
                 ApplicationName = ApplicationName,
             });
 
-            var msg = GetMessage(contentPath, recipients);
+            var msg = GetMessage(symbols, recipients);
 
             service.Users.Messages.Send(msg, "me").Execute();
         }
 
-        private static Message GetMessage(string contentPath, string[] recipients)
+        private static Message GetMessage(string symbols, string[] recipients)
         {
             using (var ms = new MemoryStream())
             {
-                var mime = GetMimeMessage(contentPath, recipients);
+                var mime = GetMimeMessage(symbols, recipients);
                 mime.WriteTo(ms);
                 var bytes = ms.ToArray();
                 var encodedStr = Convert
@@ -90,7 +91,7 @@ namespace GmailQuickstart
             }
         }
 
-        private static MimeMessage GetMimeMessage(string contentPath, string[] recipients)
+        private static MimeMessage GetMimeMessage(string symbols, string[] recipients)
         {
             var msg = new MimeMessage();
             msg.From.Add(new MailboxAddress("", "chrisshort168@gmail.com"));
@@ -98,14 +99,17 @@ namespace GmailQuickstart
             {
                 msg.To.Add(new MailboxAddress("", to));
             }
-            msg.Subject = "hello me";
-            msg.Body = new TextPart("plain") { Text = GetContent(contentPath) };
+            msg.Subject = "Trading app notification";
+            msg.Body = new TextPart("plain") { Text = GetContent(symbols) };
             return msg;
         }
 
-        private static string GetContent(string contentPath)
+        private static string GetContent(string symbols)
         {
-            return File.ReadAllText(contentPath);
+            //return File.ReadAllText(contentPath);
+            return "This is an automated email from Chris's trading app."
+                + Environment.NewLine
+                + $"The app is long {symbols}";
         }
     }
 }
