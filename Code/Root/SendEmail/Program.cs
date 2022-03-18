@@ -1,5 +1,4 @@
-﻿using System;
-using EmailSender;
+﻿using EmailSender;
 
 namespace SendEmail
 {
@@ -7,8 +6,11 @@ namespace SendEmail
     {
         public static void Main(string[] args)
         {
+            var toAddress = args[0];
+            var fromAddress = args[1];
+            var password = args[2];
             var emailer = new Emailer();
-            emailer.SendEmail();
+            emailer.SendEmail(toAddress, fromAddress, password);
         }
     }
 }
