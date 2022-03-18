@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.20
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{CAA8A2AF-D8F5-4502-B089-69BE0E0E0173}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{8A07BAE3-64A3-4F30-98BC-2307E6A4E492}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendEmail", "Root\SendEmail\SendEmail.csproj", "{75D3C886-E479-4757-B690-9CD2F9A6B43D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "Lib\EmailSender\EmailSender.csproj", "{F9B0AB36-B832-41DA-80A4-8BA3ABB32813}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75D3C886-E479-4757-B690-9CD2F9A6B43D}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{75D3C886-E479-4757-B690-9CD2F9A6B43D}.Debug|anycpu.Build.0 = Debug|anycpu
+		{75D3C886-E479-4757-B690-9CD2F9A6B43D}.Release|anycpu.ActiveCfg = Release|anycpu
+		{75D3C886-E479-4757-B690-9CD2F9A6B43D}.Release|anycpu.Build.0 = Release|anycpu
+		{F9B0AB36-B832-41DA-80A4-8BA3ABB32813}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{F9B0AB36-B832-41DA-80A4-8BA3ABB32813}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{F9B0AB36-B832-41DA-80A4-8BA3ABB32813}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{F9B0AB36-B832-41DA-80A4-8BA3ABB32813}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3055318B-ED6E-4155-A470-EFD657BF14F5}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{75D3C886-E479-4757-B690-9CD2F9A6B43D} = {8A07BAE3-64A3-4F30-98BC-2307E6A4E492}
+		{F9B0AB36-B832-41DA-80A4-8BA3ABB32813} = {CAA8A2AF-D8F5-4502-B089-69BE0E0E0173}
+	EndGlobalSection
+EndGlobal
