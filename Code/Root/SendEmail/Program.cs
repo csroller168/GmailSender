@@ -7,7 +7,6 @@ namespace SendEmail
         public static void Main(string[] args)
         {
             // TODOS
-            // make a file for email body
             // make a command line arg for number of times to send and seconds to wait in between
             var password = args[0];
             var emailer = new Emailer();
