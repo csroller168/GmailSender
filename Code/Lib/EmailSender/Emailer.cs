@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 
 namespace EmailSender
 {
@@ -13,7 +15,10 @@ namespace EmailSender
         private readonly string _bodyFilePath = ConfigurationManager.AppSettings["bodyFilePath"];
         private readonly string _subject = ConfigurationManager.AppSettings["subject"];
 
-        public void SendEmail(string fromPassword)
+        public void SendEmail(
+            int numIterations,
+            int numSecondsBetweenIterations,
+            string fromPassword)
         {
             try
             {
@@ -30,7 +35,12 @@ namespace EmailSender
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new NetworkCredential(_fromAddress, fromPassword);
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Send(message);
+
+                foreach(var i in Enumerable.Range(0, numIterations))
+                {
+                    smtp.Send(message);
+                    Thread.Sleep(TimeSpan.FromSeconds(numSecondsBetweenIterations));
+                }
             }
             catch (Exception e)
             {

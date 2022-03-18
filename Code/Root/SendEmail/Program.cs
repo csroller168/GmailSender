@@ -6,11 +6,14 @@ namespace SendEmail
     {
         public static void Main(string[] args)
         {
-            // TODOS
-            // make a command line arg for number of times to send and seconds to wait in between
-            var password = args[0];
+            var numIterations = int.Parse(args[0]);
+            var numSecondsBetweenIterations = int.Parse(args[1]);
+            var password = args[2];
             var emailer = new Emailer();
-            emailer.SendEmail(password);
+            emailer.SendEmail(
+                numIterations,
+                numSecondsBetweenIterations,
+                password);
         }
     }
 }
