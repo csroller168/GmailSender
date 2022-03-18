@@ -6,6 +6,9 @@ namespace SendEmail
     {
         public static void Main(string[] args)
         {
+            // TODOS
+            // make a file for email body
+            // make a config file for to/from address
             var toAddress = args[0];
             var fromAddress = args[1];
             var password = args[2];

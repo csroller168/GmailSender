@@ -1,0 +1,2 @@
+See generatedPass.txt in dropbox for the password to use
+See links in this folder for how the app password is generated in Google
