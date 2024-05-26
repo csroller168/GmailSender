@@ -10,10 +10,10 @@ namespace EmailSender
 {
     public class Emailer
     {
-        private readonly string _toAddress = ConfigurationManager.AppSettings["toAddress"];
-        private readonly string _fromAddress = ConfigurationManager.AppSettings["fromAddress"];
-        private readonly string _bodyFilePath = ConfigurationManager.AppSettings["bodyFilePath"];
-        private readonly string _subject = ConfigurationManager.AppSettings["subject"];
+        private readonly string _toAddress = "fake@fake.com"; // ConfigurationManager.AppSettings["toAddress"];
+        private readonly string _fromAddress = "fake@fake.com"; //ConfigurationManager.AppSettings["fromAddress"];
+        private readonly string _bodyFilePath = "fake@fake.com"; //ConfigurationManager.AppSettings["bodyFilePath"];
+        private readonly string _subject = "fake@fake.com"; //ConfigurationManager.AppSettings["subject"];
 
         public void SendEmail(
             int numIterations,
@@ -36,7 +36,7 @@ namespace EmailSender
                 smtp.Credentials = new NetworkCredential(_fromAddress, fromPassword);
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                foreach(var i in Enumerable.Range(0, numIterations))
+                foreach (var i in Enumerable.Range(0, numIterations))
                 {
                     smtp.Send(message);
                     Thread.Sleep(TimeSpan.FromSeconds(numSecondsBetweenIterations));
