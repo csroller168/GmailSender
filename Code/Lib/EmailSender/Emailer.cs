@@ -1,24 +1,35 @@
-﻿using System;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace EmailSender
 {
-    public class Emailer
+    public interface IEmailer
     {
-        private readonly string _toAddress = "fake@fake.com"; // ConfigurationManager.AppSettings["toAddress"];
-        private readonly string _fromAddress = "fake@fake.com"; //ConfigurationManager.AppSettings["fromAddress"];
-        private readonly string _bodyFilePath = "fake@fake.com"; //ConfigurationManager.AppSettings["bodyFilePath"];
-        private readonly string _subject = "fake@fake.com"; //ConfigurationManager.AppSettings["subject"];
+        void SendEmail();
+    }
+    public class Emailer : IEmailer
+    {
+        private readonly string _toAddress = "fake@fake.com";
+        private readonly string _fromAddress = "fake@fake.com";
+        private readonly string _bodyFilePath = "fake@fake.com";
+        private readonly string _subject = "fake@fake.com";
+        private readonly int _numIterations = 0;
+        private readonly int _numSecondsBetweenIterations = 0;
+        private string _fromPassword = "fake";
 
-        public void SendEmail(
-            int numIterations,
-            int numSecondsBetweenIterations,
-            string fromPassword)
+        public Emailer(IConfiguration config)
+        {
+            _toAddress = config["EmailerOptions:ToAddress"] ?? string.Empty;
+            _fromAddress = config["EmailerOptions:FromAddress"] ?? string.Empty;
+            _bodyFilePath = config["EmailerOptions:BodyFilePath"] ?? string.Empty;
+            _subject = config["EmailerOptions:Subject"] ?? string.Empty;
+            _numIterations = int.Parse(config["EmailerOptions:NumIterations"] ?? string.Empty);
+            _numSecondsBetweenIterations = int.Parse(config["EmailerOptions:NumSecondsBetweenIterations"] ?? string.Empty);
+            _fromPassword = config["EmailerOptions:FromPassword"] ?? string.Empty;
+        }
+
+        public void SendEmail()
         {
             try
             {
@@ -33,13 +44,13 @@ namespace EmailSender
                 smtp.Host = "smtp.gmail.com"; //for gmail host  
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(_fromAddress, fromPassword);
+                smtp.Credentials = new NetworkCredential(_fromAddress, _fromPassword);
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                foreach (var i in Enumerable.Range(0, numIterations))
+                foreach (var i in Enumerable.Range(0, _numIterations))
                 {
                     smtp.Send(message);
-                    Thread.Sleep(TimeSpan.FromSeconds(numSecondsBetweenIterations));
+                    Thread.Sleep(TimeSpan.FromSeconds(_numSecondsBetweenIterations));
                 }
             }
             catch (Exception e)

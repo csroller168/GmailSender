@@ -1,19 +1,27 @@
 ﻿using EmailSender;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace SendEmail
+public partial class Program
 {
-    class MainClass
+    public static async Task Main(string[] _)
     {
-        public static void Main(string[] args)
-        {
-            var numIterations = int.Parse(args[0]);
-            var numSecondsBetweenIterations = int.Parse(args[1]);
-            var password = args[2];
-            var emailer = new Emailer();
-            emailer.SendEmail(
-                numIterations,
-                numSecondsBetweenIterations,
-                password);
-        }
+        var host = Host
+            .CreateDefaultBuilder()
+            .ConfigureServices((context, services) => ConfigureServices(context.Configuration, services))
+            .Build();
+
+        var emailer = host.Services.GetRequiredService<IEmailer>();
+        emailer.SendEmail();
+    }
+
+    private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
+    {
+        var v = configuration.GetSection(nameof(EmailerOptions));
+
+        services
+            .AddTransient<IEmailer, Emailer>()
+            .Configure<EmailerOptions>(options => configuration.GetSection(nameof(EmailerOptions)));
     }
 }
