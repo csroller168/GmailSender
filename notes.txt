@@ -2,7 +2,7 @@ before using:
 	update app.config with real values
 
 usage: 
-	mono SendEmail.exe <numIterations> <numSecondsBetweenIterations> <password>
+	./SendEmail.exe
 
 maintenance:
 See generatedPass.txt in dropbox for the password to use
