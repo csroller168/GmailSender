@@ -1,8 +1,10 @@
 before using:
 	update app.config with real values
+	See the publish config for exe output
+		e.g. /Users/warren/git/GmailSender/Code/Root/SendEmail/bin/Debug/net8.0
 
 usage: 
-	./SendEmail.exe
+	./SendEmail
 
 maintenance:
 See generatedPass.txt in dropbox for the password to use
